@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
+import com.openclassrooms.entrevoisins.events.onItemListener;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
@@ -21,13 +22,11 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
-
-public class NeighbourFragment extends Fragment {
+public class NeighbourFragment extends Fragment implements onItemListener {
 
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
-
 
     /**
      * Create and return a new instance
@@ -60,7 +59,7 @@ public class NeighbourFragment extends Fragment {
      */
     private void initList() {
         mNeighbours = mApiService.getNeighbours();
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
+        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours, this::onClickItem));
     }
 
     @Override
@@ -82,12 +81,21 @@ public class NeighbourFragment extends Fragment {
     }
 
     /**
-     * Fired if the user clicks on a delete button
+     * Fired if the user clicks on a delete favorites button
      * @param event
      */
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
         mApiService.deleteNeighbour(event.neighbour);
         initList();
+    }
+
+    /**
+     * implement interface listener method
+     * @return
+     */
+    @Override
+    public void onClickItem(Neighbour neighbour) {
+        EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
     }
 }
