@@ -1,0 +1,14 @@
+<resources>
+    <!-- TextViews -->
+    <dimen name="size_title_land">14sp</dimen>
+    <dimen name="size_text_land">10sp</dimen>
+    <dimen name="size_title">20sp</dimen>
+    <dimen name="size_text">12sp</dimen>
+    <dimen name="padding_title">5dip</dimen>
+    <dimen name="padding_text">10dip</dimen>
+    <dimen name="padding_text_land">3dip</dimen>
+    <dimen name="padding_title_land">2dip</dimen>
+    <!-- Images -->
+    <dimen name="size_image_width">600dip</dimen>
+    <dimen name="size_image_width_activity">360dip</dimen>
+</resources>
