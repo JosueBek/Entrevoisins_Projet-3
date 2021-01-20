@@ -11,8 +11,10 @@ import org.junit.runners.JUnit4;
 
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit test on Neighbour service
@@ -39,5 +41,30 @@ public class NeighbourServiceTest {
         Neighbour neighbourToDelete = service.getNeighbours().get(0);
         service.deleteNeighbour(neighbourToDelete);
         assertFalse(service.getNeighbours().contains(neighbourToDelete));
+    }
+    @Test
+    public void getFavoritesWithSuccess() {
+        List<Neighbour> neighbours = service.getFavorites();
+        Neighbour neighbour = service.getNeighbours().get(0);
+        service.addFavorites(neighbour);
+        assertEquals(1, service.getFavorites().size());
+        assertThat(neighbours, IsIterableContainingInAnyOrder.containsInAnyOrder(neighbours.toArray()));
+    }
+
+    @Test
+    public void addFavoritesNeighbourWithSuccess() {
+        Neighbour neighbourToAdd = service.getNeighbours().get(0);
+        service.addFavorites(neighbourToAdd);
+        assertEquals(1, service.getFavorites().size());
+        assertTrue(service.getFavorites().contains(neighbourToAdd));
+
+    }
+
+    @Test
+    public void deleteFavoritesNeighbourWithSuccess() {
+        Neighbour neighbourToDelete = service.getNeighbours().get(0);
+        service.addFavorites(neighbourToDelete);
+        service.deleteFavorites(neighbourToDelete);
+        assertFalse(service.getFavorites().contains(neighbourToDelete));
     }
 }
