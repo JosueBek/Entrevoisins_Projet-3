@@ -7,6 +7,9 @@ import java.util.Objects;
  */
 public class Neighbour {
 
+    /** favorite boolean */
+    private boolean favorite = false;
+
     /** Identifier */
     private long id;
 
@@ -100,5 +103,13 @@ public class Neighbour {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public boolean isFavorites() {
+        return favorite ;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 }

@@ -27,4 +27,23 @@ public interface NeighbourApiService {
      * @param neighbour
      */
     void createNeighbour(Neighbour neighbour);
+
+    /**
+     * Get all the Favorites
+     * @return {@link List}
+     */
+    List<Neighbour> getFavorites();
+
+    /**
+     * Add a Favorite
+     * @param neighbour
+     */
+    void addFavorites(Neighbour neighbour);
+
+    /**
+     * Deletes a neighbour in the favorite list
+     * @param neighbour
+     */
+    void deleteFavorites(Neighbour neighbour);
+
 }
